@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -58,7 +58,8 @@ public class FormController {
 		binder.addValidators(validador);
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		dateFormat.setLenient(false);
-		binder.registerCustomEditor(Date.class, "fechaNacimiento", new CustomDateEditor(dateFormat, true));
+		binder.registerCustomEditor(Date.class, "fechaNacimiento", new CustomDateEditor(dateFormat,
+				true));
 
 		binder.registerCustomEditor(String.class, "nombre", new NombreMayusculaEditor());
 		binder.registerCustomEditor(String.class, "apellido", new NombreMayusculaEditor());
@@ -137,20 +138,16 @@ public class FormController {
 
 	@PostMapping("/form")
 	public String procesar(@Valid Usuario usuario, BindingResult result, Model model) {
-
 		// validador.validate(usuario, result);
-
 		if (result.hasErrors()) {
 			model.addAttribute("titulo", "Resultado form");
 			return "form";
 		}
-		
 		return "redirect:/ver";
 	}
-	
 	@GetMapping("/ver")
-	public String ver(@SessionAttribute(name="usuario", required = false) Usuario usuario, Model model, SessionStatus status) {
-		
+	public String ver(@SessionAttribute(name="usuario", required = false) Usuario usuario, Model model,
+					  SessionStatus status) {
 		if(usuario == null) {
 			return "redirect:/form";
 		}
