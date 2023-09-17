@@ -14,10 +14,8 @@ public class UsuarioValidador implements Validator {
 	public boolean supports(Class<?> clazz) {
 		return Usuario.class.isAssignableFrom(clazz);
 	}
-
 	@Override
-	public void validate(Object target, Errors errors) {
-		// Usuario usuario = (Usuario)target;
+	public void validate(Object target, Errors errors) {		// Usuario usuario = (Usuario)target;
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nombre", "requerido.usuario.nombre");
 		

@@ -9,7 +9,6 @@ import com.bolsadeideas.springboot.form.app.services.RoleService;
 
 @Component
 public class RolesEditor extends PropertyEditorSupport{
-
 	@Autowired
 	private RoleService service;
 	
